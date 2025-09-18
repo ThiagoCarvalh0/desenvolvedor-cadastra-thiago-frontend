@@ -1,0 +1,675 @@
+.app {
+  min-height: 100vh;
+  background-color: #ffffff;
+  font-family: 'Open Sans', sans-serif;
+  width: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden; // Evita scroll horizontal
+}
+
+// Regra global para evitar extrapolação
+* {
+  box-sizing: border-box;
+}
+
+.header {
+  background-color: #fff;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 2px solid #c7c7c7;
+  height: 60px; // Aumentei a altura para dar mais espaço
+  width: 100%;
+
+  .headerContent {
+    max-width: 1500px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    height: 100%; // Garante que o container ocupe toda a altura do header
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 8px 0; // Adiciona padding vertical para centralizar melhor
+    
+    .logoImg {
+      height: 25px;
+      width: 165.82px;
+      object-fit: contain; // Mantém proporção da imagem
+    }
+  }
+
+  .cartIcon {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 8px 0; // Adiciona padding vertical para centralizar melhor
+    cursor: pointer;
+    
+    img {
+      height: 24px;
+      width: 24px;
+      object-fit: contain; // Mantém proporção da imagem
+    }
+  }
+}
+
+.main {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: block;
+  position: relative;
+  flex: 1; // Faz o main crescer para empurrar o footer para baixo
+  min-height: calc(100vh - 60px - 33px); // Altura mínima: viewport - header - footer
+  padding-bottom: 40px; // Margem do footer para os elementos acima
+
+  .mainContent {
+    max-width: 1500px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    padding: 0 20px;
+  }
+}
+
+// Seção do título e ordenação - alinhada com header
+.pageHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  margin-top: 0;
+  border-bottom: 1px solid #e0e0e0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+// Botões mobile (ocultos por padrão)
+.mobileButtons {
+  display: none;
+}
+
+.mobileFilterBtn,
+.mobileSortBtn {
+  background: white;
+  border: 1px solid #00000080;
+  padding: 12px 20px;
+  font-size: 14px;
+  color: #000000;
+  cursor: pointer;
+  font-family: 'Open Sans', sans-serif;
+  border-radius: 0;
+  margin-left: 10px;
+  
+  &:hover {
+    border-color: #FB953E;
+  }
+}
+
+// Seção de conteúdo principal (sidebar + produtos)
+.contentSection {
+  display: flex;
+  gap: 40px;
+  margin-top: 20px;
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.sidebar {
+  background: white;
+  height: fit-content;
+  width: 157px;
+  flex-shrink: 0;
+  max-width: 157px;
+  box-sizing: border-box;
+}
+
+// Ocultar sidebar em mobile
+@media (max-width: 899px) {
+  .sidebar {
+    display: none;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+  min-width: 0; // Permite que o flex item encolha
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden; // Evita extrapolação
+}
+
+.pageTitle {
+  font-size: 32px;
+  font-weight: 400;
+  color: #333333;
+  margin: 0;
+  margin-left: 0; // Já posicionado pelo content
+  font-family: 'Open Sans', sans-serif;
+}
+
+.sortContainer {
+  position: relative;
+  right: 0;
+  top: 0;
+  
+  .sortSelect {
+    background: white;
+    border: 1px solid #00000080;
+    padding: 14px 35px 14px 15px; // Aumentado padding vertical
+    font-size: 16px;
+    color: #000000;
+    cursor: pointer;
+    width: 142px;
+    height: 48px; // Aumentado altura para dar mais espaço ao texto
+    font-family: 'Open Sans', sans-serif;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center; // Ajustado para o novo padding
+    background-size: 16px;
+    border-radius: 0; // Sem bordas arredondadas
+    
+    &:focus {
+      outline: none;
+      border-color: #FB953E; // Cor laranja no foco
+    }
+    
+    &:hover {
+      border-color: #FB953E; // Cor laranja no hover
+    }
+
+    // Estilo para as opções do select
+    option {
+      background: white;
+      color: #000000;
+      padding: 8px;
+      
+      &:hover {
+        background: #FB953E !important; // Fundo laranja no hover
+        color: white !important;
+      }
+      
+      &:checked {
+        background: white !important; // Fundo branco quando selecionado
+        color: #000000 !important;
+      }
+    }
+  }
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+  
+  h2 {
+    color: #666;
+    font-size: 1.2rem;
+  }
+}
+
+.loadMore {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+  margin-left: 0; // Já posicionado pelo content
+  width: 100%;
+}
+
+.loadMoreBtn {
+  background-color: #FB953E;
+  color: white;
+  border: 1px solid #000000;
+  padding: 12px 35px; // Mais respiro interno
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease; // Transição para todas as propriedades
+  text-transform: uppercase;
+  width: 175px;
+  height: 42px; // Altura aumentada para melhor proporção
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0; // Sem bordas arredondadas
+  font-family: 'Open Sans', sans-serif;
+
+  &:hover {
+    background-color: #e8852a;
+    transform: translateY(-1px); // Efeito de elevação no hover
+    box-shadow: 0 2px 8px rgba(251, 149, 62, 0.3); // Sombra sutil
+  }
+
+  &:active {
+    transform: translateY(0); // Volta à posição original
+    box-shadow: 0 1px 4px rgba(251, 149, 62, 0.2); // Sombra menor
+  }
+}
+
+// Mobile Sheets
+.mobileSheet {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: stretch;
+}
+
+.sheetContent {
+  background: white;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  overflow-y: auto;
+  position: relative;
+}
+
+.sheetTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333333;
+  margin: 0 0 20px 0;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  position: relative;
+}
+
+.sheetCloseBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #666666;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  &:hover {
+    color: #333333;
+  }
+}
+
+// Opções de ordenação
+.sortOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.sortOption {
+  background: white;
+  border: 1px solid #e0e0e0;
+  padding: 16px;
+  font-size: 16px;
+  color: #333333;
+  cursor: pointer;
+  font-family: 'Open Sans', sans-serif;
+  border-radius: 0;
+  text-align: left;
+  
+  &:hover {
+    border-color: #FB953E;
+  }
+  
+  &.active {
+    border-color: #FB953E;
+    background: #FB953E;
+    color: white;
+  }
+}
+
+// Filtros mobile
+.mobileFilters {
+  margin-bottom: 20px;
+}
+
+// Botões do sheet
+.sheetButtons {
+  display: flex;
+  gap: 12px;
+  padding: 0 20px;
+  margin: 0 -20px -20px -20px;
+}
+
+.cancelBtn {
+  flex: 1;
+  background: white;
+  border: 1px solid #00000080;
+  padding: 16px;
+  font-size: 16px;
+  color: #000000;
+  cursor: pointer;
+  font-family: 'Open Sans', sans-serif;
+  border-radius: 0;
+  
+  &:hover {
+    border-color: #FB953E;
+  }
+}
+
+.applyBtn {
+  flex: 1;
+  background: #FB953E;
+  border: 1px solid #FB953E;
+  padding: 16px;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+  font-family: 'Open Sans', sans-serif;
+  border-radius: 0;
+  
+  &:hover {
+    background: #e8852a;
+    border-color: #e8852a;
+  }
+}
+
+.footer {
+  background-color: #000000;
+  color: white;
+  text-align: center;
+  padding: 7px 0;
+  margin-top: 0;
+  height: 33px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: 'Open Sans', sans-serif;
+    letter-spacing: 0.7px;
+  }
+}
+
+// Sistema de Breakpoints Responsivo
+// Desktop Large (1400px+)
+@media (min-width: 1400px) {
+  .headerContent,
+  .mainContent {
+    max-width: 1500px;
+    padding: 0 20px;
+  }
+}
+
+// Desktop (1200px - 1399px)
+@media (max-width: 1399px) and (min-width: 1200px) {
+  .headerContent,
+  .mainContent {
+    max-width: 1200px;
+    padding: 0 20px;
+  }
+  
+  .contentSection {
+    gap: 35px;
+  }
+}
+
+// Desktop Small (1024px - 1199px)
+@media (max-width: 1199px) and (min-width: 1024px) {
+  .headerContent,
+  .mainContent {
+    max-width: 100%;
+    padding: 0 20px;
+  }
+  
+  .contentSection {
+    gap: 30px;
+  }
+  
+  .sidebar {
+    width: 140px;
+  }
+}
+
+// Tablet Large (900px - 1023px)
+@media (max-width: 1023px) and (min-width: 900px) {
+  .headerContent,
+  .mainContent {
+    padding: 0 15px;
+  }
+  
+  .contentSection {
+    gap: 25px;
+  }
+  
+  .sidebar {
+    width: 130px;
+  }
+  
+  .pageTitle {
+    font-size: 28px;
+  }
+}
+
+// Tablet (768px - 899px)
+@media (max-width: 899px) and (min-width: 768px) {
+  .headerContent,
+  .mainContent {
+    padding: 0 15px;
+  }
+  
+  .pageHeader {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: center; // Centraliza em mobile
+    padding: 15px 0;
+  }
+  
+  .sortContainer {
+    display: none; // Oculta select desktop
+  }
+  
+  .mobileButtons {
+    display: flex; // Mostra botões mobile
+    gap: 10px;
+  }
+
+  .contentSection {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .sidebar {
+    width: 100%;
+    order: 2;
+  }
+
+  .content {
+    order: 1;
+    width: 100%;
+  }
+  
+  .pageTitle {
+    font-size: 26px;
+  }
+}
+
+// Mobile Large (600px - 767px)
+@media (max-width: 767px) and (min-width: 600px) {
+  .headerContent,
+  .mainContent {
+    padding: 0 12px;
+  }
+  
+  .pageHeader {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: center; // Centraliza em mobile
+    padding: 12px 0;
+  }
+  
+  .sortContainer {
+    display: none; // Oculta select desktop
+  }
+  
+  .mobileButtons {
+    display: flex; // Mostra botões mobile
+    gap: 10px;
+  }
+
+  .contentSection {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .sidebar {
+    width: 100%;
+    order: 2;
+  }
+
+  .content {
+    order: 1;
+    width: 100%;
+  }
+  
+  .pageTitle {
+    font-size: 24px;
+  }
+
+  .loadMoreBtn {
+    padding: 10px 25px;
+    font-size: 13px;
+  }
+}
+
+// Mobile (480px - 599px)
+@media (max-width: 599px) and (min-width: 480px) {
+  .headerContent,
+  .mainContent {
+    padding: 0 10px;
+  }
+  
+  .pageHeader {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center; // Centraliza em mobile
+    padding: 10px 0;
+  }
+  
+  .sortContainer {
+    display: none; // Oculta select desktop
+  }
+  
+  .mobileButtons {
+    display: flex; // Mostra botões mobile
+    gap: 10px;
+  }
+
+  .contentSection {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .sidebar {
+    width: 100%;
+    order: 2;
+  }
+
+  .content {
+    order: 1;
+    width: 100%;
+  }
+  
+  .pageTitle {
+    font-size: 22px;
+  }
+
+  .loadMoreBtn {
+    padding: 8px 20px;
+    font-size: 12px;
+  }
+}
+
+// Mobile Small (até 479px)
+@media (max-width: 479px) {
+  .headerContent,
+  .mainContent {
+    padding: 0 8px;
+  }
+  
+  .pageHeader {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center; // Centraliza em mobile
+    padding: 8px 0;
+  }
+  
+  .sortContainer {
+    display: none; // Oculta select desktop
+  }
+  
+  .mobileButtons {
+    display: flex; // Mostra botões mobile
+    gap: 10px;
+  }
+
+  .contentSection {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .sidebar {
+    width: 100%;
+    order: 2;
+  }
+
+  .content {
+    order: 1;
+    width: 100%;
+  }
+  
+  .pageTitle {
+    font-size: 20px;
+  }
+
+  .loadMoreBtn {
+    padding: 6px 16px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 0.75rem;
+  }
+
+  .main {
+    padding: 0.75rem;
+  }
+}
