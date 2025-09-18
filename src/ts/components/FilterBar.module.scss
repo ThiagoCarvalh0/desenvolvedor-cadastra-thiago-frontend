@@ -1,0 +1,292 @@
+.filterBar {
+  background: white;
+  padding: 0;
+  width: 157px;
+  margin-left: 0;
+  max-width: 157px;
+  box-sizing: border-box;
+  overflow: hidden; // Evita extrapolação
+}
+
+// Mobile Filter Bar
+.mobileFilterBar {
+  background: white;
+  padding: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+// Collapsible Components
+.collapsible {
+  border-bottom: 1px solid #e0e0e0;
+  
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.collapsibleHeader {
+  width: 100%;
+  background: white;
+  border: none;
+  padding: 16px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333333;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Open Sans', sans-serif;
+  
+  &:hover {
+    background: #f8f8f8;
+  }
+}
+
+.arrow {
+  transition: transform 0.2s ease;
+  font-size: 12px;
+  
+  &.open {
+    transform: rotate(180deg);
+  }
+}
+
+.collapsibleContent {
+  padding: 0 0 16px 0;
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 0;
+}
+
+.sectionTitle {
+  font-size: 16px;
+  font-weight: 400;
+  color: #333333;
+  margin: 0;
+  text-transform: none;
+  letter-spacing: 0.8px;
+  margin-bottom: 14px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.colorOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 24px;
+}
+
+.colorOption {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #000000;
+  margin-bottom: 16px;
+
+  input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    border: 1px solid #00000080;
+    background: white;
+    cursor: pointer;
+    appearance: none;
+    position: relative;
+
+    &:checked {
+      background: white;
+      border-color: #00000080;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 10px;
+        height: 10px;
+        background: #FB953E;
+        border-radius: 1px;
+      }
+    }
+  }
+
+  .colorName {
+    font-weight: 400;
+    font-family: 'Open Sans', sans-serif;
+  }
+}
+
+.seeAll {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  cursor: pointer;
+  font-size: 12px;
+  color: #666666;
+  margin-top: 0;
+  font-family: 'Open Sans', sans-serif;
+
+  .arrow {
+    font-size: 5px;
+  }
+}
+
+.sizeOptions {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.sizeBtn {
+  background: white;
+  border: 1px solid #00000080;
+  padding: 0;
+  font-size: 16px;
+  font-weight: 400;
+  color: #00000080;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Open Sans', sans-serif;
+  letter-spacing: 0.8px;
+
+  &:hover {
+    background: #f5f5f5;
+  }
+
+  &.active {
+    border-color: #FB953E;
+    color: #000000;
+  }
+}
+
+.priceOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.priceOption {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #000000;
+  margin-bottom: 16px;
+
+  input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    border: 1px solid #00000080;
+    background: white;
+    cursor: pointer;
+    appearance: none;
+    position: relative;
+
+    &:checked {
+      background: white;
+      border-color: #00000080;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 10px;
+        height: 10px;
+        background: #FB953E;
+        border-radius: 1px;
+      }
+    }
+  }
+
+  span {
+    font-weight: 400;
+    font-family: 'Open Sans', sans-serif;
+  }
+}
+
+// Responsividade
+@media (max-width: 768px) {
+  .filterBar {
+    padding: 1.25rem;
+  }
+
+  .title {
+    font-size: 1.1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .filters {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .priceRange {
+    gap: 0.5rem;
+  }
+
+  .select,
+  .input {
+    padding: 0.625rem;
+    font-size: 0.85rem;
+  }
+
+  .clearBtn {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.85rem;
+    align-self: stretch;
+  }
+}
+
+@media (max-width: 480px) {
+  .filterBar {
+    padding: 1rem;
+  }
+
+  .title {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .filters {
+    gap: 1rem;
+  }
+
+  .priceRange {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .select,
+  .input {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .clearBtn {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+}
+
