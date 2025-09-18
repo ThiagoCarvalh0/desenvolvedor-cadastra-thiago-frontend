@@ -96,6 +96,7 @@
   font-size: 14px;
   color: #000000;
   margin-bottom: 16px;
+  min-height: 20px; // Garante altura mínima para alinhamento
 
   input[type="checkbox"] {
     width: 16px;
@@ -105,6 +106,8 @@
     cursor: pointer;
     appearance: none;
     position: relative;
+    flex-shrink: 0; // Evita que o checkbox seja comprimido
+    margin: 0; // Remove margens padrão
 
     &:checked {
       background: white;
@@ -193,6 +196,7 @@
   font-size: 14px;
   color: #000000;
   margin-bottom: 16px;
+  min-height: 20px; // Garante altura mínima para alinhamento
 
   input[type="checkbox"] {
     width: 16px;
@@ -202,6 +206,8 @@
     cursor: pointer;
     appearance: none;
     position: relative;
+    flex-shrink: 0; // Evita que o checkbox seja comprimido
+    margin: 0; // Remove margens padrão
 
     &:checked {
       background: white;
