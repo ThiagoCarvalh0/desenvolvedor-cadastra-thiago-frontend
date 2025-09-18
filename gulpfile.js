@@ -12,11 +12,12 @@ const webpackConfig = require("./webpack.config.js");
 
 const paths = {
   scripts: {
-    src: "src/ts/index.ts",
-    watch: "src/ts/**/*.ts",
+    src: "src/ts/index.tsx",
+    watch: "src/ts/**/*.{ts,tsx}",
   },
   styles: {
     src: "src/scss/main.scss",
+    watch: "src/**/*.scss",
   },
   img: {
     src: "src/img/**/*",
@@ -92,7 +93,7 @@ const dev = () => {
     "change",
     browserSync.reload
   );
-  watch(paths.styles.src, { ignoreInitial: false }, styles);
+  watch(paths.styles.watch, { ignoreInitial: false }, styles);
   watch(paths.img.src, { ignoreInitial: false }, img);
   watch(paths.html.src, { ignoreInitial: false }, html).on(
     "change",
