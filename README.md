@@ -74,3 +74,82 @@ O objetivo desse desafio é avaliar a seus conhecimentos fundamentais de front e
 - Adição de processo no gulp para otimizar imagens
 
 ##### Dúvidas: [vinicius.delfino@cadastra.com](mailto:vinicius.delfino@cadastra.com?subject=Dúvida%20Vaga%20DEV%20-%20Cadastra)
+
+---
+
+## 🚀 Como executar o projeto
+
+### Pré-requisitos
+- Node.js versão 14 ou superior
+- npm ou pnpm
+
+### Instalação e execução
+
+1. **Clone o repositório:**
+```bash
+git clone https://github.com/seu-usuario/desenvolvedor-cadastra.git
+cd desenvolvedor-cadastra
+```
+
+2. **Instale as dependências:**
+```bash
+npm install
+# ou
+pnpm install
+```
+
+3. **Execute o projeto:**
+```bash
+npm start
+# ou
+pnpm start
+```
+
+4. **Acesse a aplicação:**
+- **Frontend:** http://localhost:3000
+- **API (produtos):** http://localhost:5000/products
+
+### Tecnologias utilizadas
+
+- **React** com TypeScript
+- **SCSS** para estilização
+- **Gulp** para build e desenvolvimento
+- **Browsersync** para live reload
+- **JSON Server** para API mock
+- **Webpack** para bundling
+
+### Funcionalidades implementadas
+
+**Layout responsivo** - Funciona em desktop, tablet e mobile  
+**Filtros avançados** - Por cor, tamanho e faixa de preço  
+**Sistema de ordenação** - Mais recentes, maior/menor preço  
+**Interface mobile** - Sheets laterais para filtros e ordenação  
+**Paginação** - Botão "Carregar Mais"  
+**Design pixel-perfect** - Baseado no protótipo do Figma  
+**Performance otimizada** - Lazy loading e otimizações  
+
+### Estrutura do projeto
+
+```
+src/
+├── ts/
+│   ├── App.tsx                 # Componente principal
+│   ├── App.module.scss         # Estilos globais
+│   ├── components/
+│   │   ├── ProductCard.tsx     # Card de produto
+│   │   ├── ProductList.tsx     # Lista de produtos
+│   │   ├── FilterBar.tsx       # Barra de filtros
+│   │   └── Cart.tsx            # Componente do carrinho
+│   └── types/
+│       └── css-modules.d.ts    # Tipos TypeScript
+├── img/                        # Imagens do projeto
+└── index.html                  # HTML principal
+```
+
+---
+
+## 📧 Contato
+
+**E-mail:** [webdevthiagocarvalho@gmail.com](mailto:webdevthiagocarvalho@gmail.com)  
+**LinkedIn:** [linkedin.com/in/thiago-carvalho-ss](https://www.linkedin.com/in/thiago-carvalho-ss/)  
+**GitHub:** [github.com/ThiagoCarvalh0](https://github.com/ThiagoCarvalh0)
