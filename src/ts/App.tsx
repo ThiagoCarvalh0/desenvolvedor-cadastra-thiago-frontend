@@ -18,6 +18,7 @@ export const App: React.FC = () => {
   const [sortBy, setSortBy] = useState<string>('');
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState<boolean>(false);
   const [isMobileSortOpen, setIsMobileSortOpen] = useState<boolean>(false);
+  const [isDesktopSortOpen, setIsDesktopSortOpen] = useState<boolean>(false);
 
   const serverUrl = "http://localhost:5000";
 
@@ -28,6 +29,23 @@ export const App: React.FC = () => {
   useEffect(() => {
     applyFilters();
   }, [products, filters, sortBy]);
+
+  // Fechar dropdown quando clicar fora
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (isDesktopSortOpen) {
+        const target = event.target as HTMLElement;
+        if (!target.closest(`.${styles.customSelect}`)) {
+          setIsDesktopSortOpen(false);
+        }
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isDesktopSortOpen]);
 
   const fetchProducts = async () => {
     try {
@@ -86,6 +104,11 @@ export const App: React.FC = () => {
     setSortBy(event.target.value);
   };
 
+  const handleDesktopSortSelect = (value: string) => {
+    setSortBy(value);
+    setIsDesktopSortOpen(false);
+  };
+
   const handleMobileSortSelect = (value: string) => {
     setSortBy(value);
     setIsMobileSortOpen(false);
@@ -138,14 +161,49 @@ export const App: React.FC = () => {
           <div className={styles.pageHeader}>
             <h1 className={styles.pageTitle}>Blusas</h1>
             
-            {/* Desktop - Select de ordenação */}
+            {/* Desktop - Dropdown customizado de ordenação */}
             <div className={styles.sortContainer}>
-              <select className={styles.sortSelect} value={sortBy} onChange={handleSortChange}>
-                <option value="">Ordenar por:</option>
-                <option value="recentes">Mais recentes</option>
-                <option value="menor-preco">Menor preço</option>
-                <option value="maior-preco">Maior preço</option>
-              </select>
+              <div className={styles.customSelect}>
+                <button 
+                  className={styles.selectButton}
+                  onClick={() => setIsDesktopSortOpen(!isDesktopSortOpen)}
+                >
+                  {sortBy === '' ? 'Ordenar por:' : 
+                   sortBy === 'recentes' ? 'Mais recentes' :
+                   sortBy === 'menor-preco' ? 'Menor preço' :
+                   sortBy === 'maior-preco' ? 'Maior preço' : 'Ordenar por:'}
+                  <span className={`${styles.selectArrow} ${isDesktopSortOpen ? styles.open : ''}`}>▼</span>
+                </button>
+                
+                {isDesktopSortOpen && (
+                  <div className={styles.selectDropdown}>
+                    <button 
+                      className={`${styles.selectOption} ${sortBy === '' ? styles.selected : ''}`}
+                      onClick={() => handleDesktopSortSelect('')}
+                    >
+                      Ordenar por:
+                    </button>
+                    <button 
+                      className={`${styles.selectOption} ${sortBy === 'recentes' ? styles.selected : ''}`}
+                      onClick={() => handleDesktopSortSelect('recentes')}
+                    >
+                      Mais recentes
+                    </button>
+                    <button 
+                      className={`${styles.selectOption} ${sortBy === 'menor-preco' ? styles.selected : ''}`}
+                      onClick={() => handleDesktopSortSelect('menor-preco')}
+                    >
+                      Menor preço
+                    </button>
+                    <button 
+                      className={`${styles.selectOption} ${sortBy === 'maior-preco' ? styles.selected : ''}`}
+                      onClick={() => handleDesktopSortSelect('maior-preco')}
+                    >
+                      Maior preço
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* Mobile - Botões de Filtrar e Ordenar */}

@@ -215,6 +215,89 @@
       }
     }
   }
+
+  // Dropdown customizado
+  .customSelect {
+    position: relative;
+    width: 180px; // Aumentado de 142px para 180px
+  }
+
+  .selectButton {
+    background: white;
+    border: 1px solid #00000080;
+    padding: 14px 30px 14px 15px; // Reduzido padding direito de 35px para 30px
+    font-size: 16px;
+    color: #000000;
+    cursor: pointer;
+    width: 100%;
+    height: 48px;
+    font-family: 'Open Sans', sans-serif;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    white-space: nowrap; // Evita quebra de linha
+    
+    &:hover {
+      border-color: #FB953E;
+    }
+    
+    &:focus {
+      outline: none;
+      border-color: #FB953E;
+    }
+  }
+
+  .selectArrow {
+    font-size: 10px; // Reduzido de 12px para 10px
+    transition: transform 0.2s ease;
+    margin-left: 8px; // Adiciona margem para separar do texto
+    flex-shrink: 0; // Evita que a seta seja comprimida
+    
+    &.open {
+      transform: rotate(180deg);
+    }
+  }
+
+  .selectDropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #00000080;
+    border-top: none;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .selectOption {
+    background: white;
+    border: none;
+    padding: 12px 15px;
+    font-size: 16px;
+    color: #000000;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    font-family: 'Open Sans', sans-serif;
+    transition: background-color 0.2s ease;
+    
+    &:hover {
+      background: #FB953E !important;
+      color: white !important;
+    }
+    
+    &.selected {
+      background: white;
+      color: #000000;
+      font-weight: 600;
+    }
+    
+    &:first-child {
+      border-top: 1px solid #e0e0e0;
+    }
+  }
 }
 
 .loading {
