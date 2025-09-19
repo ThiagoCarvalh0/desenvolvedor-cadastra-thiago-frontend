@@ -147,10 +147,10 @@ export const App: React.FC = () => {
           <header className={styles.header}>
             <div className={styles.headerContent}>
               <div className={styles.logo}>
-                <img src="./img/logo_cadastra.png" alt="Cadastra" className={styles.logoImg} />
+                <img src="./img/logo_cadastra.webp" alt="Cadastra" className={styles.logoImg} />
               </div>
               <div className={styles.cartIcon}>
-                <img src="./img/icon.png" alt="Carrinho" />
+                <img src="./img/icon.webp" alt="Carrinho" />
               </div>
             </div>
           </header>

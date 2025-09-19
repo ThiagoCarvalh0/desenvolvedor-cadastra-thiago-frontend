@@ -117,6 +117,9 @@ pnpm start
 - **Browsersync** para live reload
 - **JSON Server** para API mock
 - **Webpack** para bundling
+- **gulp-imagemin** para otimização de imagens
+- **gulp-webp** para conversão WebP
+- **gulp-rename** para renomeação de arquivos
 
 ### Funcionalidades implementadas
 
@@ -127,6 +130,7 @@ pnpm start
 **Paginação** - Botão "Carregar Mais"  
 **Design pixel-perfect** - Baseado no protótipo do Figma  
 **Performance otimizada** - Lazy loading e otimizações  
+**Otimização de imagens** - Processo automatizado no Gulp para otimizar imagens e converter para WebP  
 
 ### Estrutura do projeto
 
@@ -145,6 +149,69 @@ src/
 ├── img/                        # Imagens do projeto
 └── index.html                  # HTML principal
 ```
+
+### Otimização de Imagens
+
+O projeto inclui um processo automatizado no Gulp para otimização de imagens que funciona tanto em desenvolvimento quanto em produção:
+
+- **Conversão automática para WebP** - Todas as imagens são otimizadas e convertidas para WebP
+- **Saída única** - Apenas WebP otimizado é gerado (sem versões originais)
+- **Qualidade otimizada** - WebP com qualidade 80% (desenvolvimento) e 85% (produção)
+- **Processo integrado** - Executado automaticamente em dev e build
+- **Resultado** - Economia de até 74.9% no tamanho das imagens
+
+#### Comandos disponíveis:
+
+```bash
+# Desenvolvimento (inclui otimização automática)
+npm start
+# ou
+pnpm start
+
+# Otimizar apenas as imagens (WebP)
+npx gulp imgWebP
+
+# Build de desenvolvimento (WebP qualidade 80%)
+npx gulp build
+
+# Build de produção (WebP qualidade 85%)
+npx gulp buildProd
+```
+
+#### Funcionalidades implementadas:
+
+- Conversão automática de todas as imagens para WebP
+- Saída única: apenas WebP otimizado (sem versões originais)
+- Qualidade otimizada: 80% (dev) e 85% (produção)
+- Integração com pipeline de desenvolvimento e build
+- Logs de otimização durante o processo
+- Watch automático - converte imagens quando modificadas
+- Máxima performance para navegadores modernos
+
+#### Como funciona:
+
+**Em Desenvolvimento (`pnpm start`):**
+- Imagens são otimizadas e convertidas automaticamente para WebP (qualidade 80%)
+- Watch monitora mudanças em `src/img/` e re-converte quando necessário
+- Servidor serve apenas WebP otimizado
+
+**Em Produção (`npx gulp buildProd`):**
+- Todas as imagens são otimizadas e convertidas para WebP (qualidade 85%)
+- Apenas WebP é gerado (sem versões originais)
+- Processo completo de otimização aplicado
+
+**Estrutura de saída:**
+```
+dist/img/
+└── icon.webp, logo_cadastra.webp, img_*.webp  # Todas as imagens em WebP
+```
+
+**Como funciona:**
+- O db.json referencia diretamente `/img/img_2.webp`
+- Todas as imagens são otimizadas e convertidas para WebP
+- Apenas WebP é servido (máxima performance)
+- Economia de até 74.9% no tamanho das imagens
+- Ideal para navegadores modernos (95%+ de suporte)
 
 ---
 

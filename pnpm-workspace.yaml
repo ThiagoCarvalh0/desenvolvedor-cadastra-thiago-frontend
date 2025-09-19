@@ -1,0 +1,11 @@
+ignoredBuiltDependencies:
+  - cwebp-bin
+  - gifsicle
+  - mozjpeg
+  - optipng-bin
+  - pngquant-bin
+
+onlyBuiltDependencies:
+  - '@parcel/watcher'
+  - es5-ext
+  - sharp
