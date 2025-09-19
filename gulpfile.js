@@ -6,6 +6,7 @@ const del = require("del");
 const autoprefixer = require("gulp-autoprefixer");
 const sass = require("gulp-sass")(require("sass"));
 const sourcemaps = require("gulp-sourcemaps");
+const cleanCSS = require("gulp-clean-css");
 const browserSync = require("browser-sync").create();
 // Importação básica do gulp-imagemin
 const imagemin = require("gulp-imagemin");
@@ -58,6 +59,10 @@ function styles() {
         cascade: false,
       })
     )
+    .pipe(cleanCSS({
+      level: 2,
+      compatibility: 'ie8'
+    }))
     .pipe(sourcemaps.write())
     .pipe(dest(paths.dest))
     .pipe(browserSync.stream());
