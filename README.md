@@ -121,6 +121,36 @@ pnpm start
 - **gulp-webp** para conversão WebP
 - **gulp-rename** para renomeação de arquivos
 
+### Arquitetura de Módulos
+
+O projeto utiliza uma arquitetura híbrida que combina **ES Modules** (import/export) e **CommonJS** (require/module.exports):
+
+**ES Modules (Frontend):**
+```typescript
+// src/ts/App.tsx
+import React, { useState } from 'react';
+import { Product, CONSTANTS } from './types';
+```
+
+**CommonJS (Build Tools):**
+```javascript
+// gulpfile.js
+const { series, src, dest } = require("gulp");
+const webpack = require("webpack");
+```
+
+**Como funciona:**
+- **TypeScript** transpila `import/export` para `require/module.exports`
+- **Webpack** converte todos os módulos para CommonJS no bundle final
+- **Gulp** usa CommonJS nativamente para tarefas de build
+- **Node.js** suporta ambos os sistemas de módulos
+
+**Vantagens:**
+- Sintaxe moderna e limpa no código frontend
+- Compatibilidade total com ferramentas de build
+- Performance otimizada pelo Webpack
+- Flexibilidade para usar a melhor abordagem em cada contexto
+
 ### Funcionalidades implementadas
 
 **Layout responsivo** - Funciona em desktop, tablet e mobile  
