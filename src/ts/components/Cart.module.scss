@@ -18,21 +18,21 @@
   position: relative;
   width: 20px;
   height: 23px;
-  margin-right: 432px; // Posicionamento correto baseado no Figma
 
   &:hover {
     background-color: transparent;
+    
+    .cartIcon {
+      color: #007bff;
+    }
   }
 }
 
 .cartIcon {
-  font-size: 0;
   width: 17px;
   height: 20px;
-  background-image: url('../../img/icon.webp');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
+  color: #000000;
+  transition: color 0.2s ease;
 }
 
 .cartCount {

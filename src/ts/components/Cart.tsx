@@ -54,8 +54,25 @@ export const Cart: React.FC<CartProps> = ({
         onClick={toggleCart}
         aria-label="Abrir carrinho de compras"
       >
-        <span className={styles.cartIcon}></span>
-        <span className={styles.cartCount}>{getTotalItems()}</span>
+        <svg 
+          className={styles.cartIcon}
+          width="17" 
+          height="20" 
+          viewBox="0 0 17 20" 
+          fill="none" 
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path 
+            d="M1 1H3.5L5.5 13H14L16 5H5M5.5 13L4 1H1M5.5 13H14M14 13C13.4477 13 13 13.4477 13 14C13 14.5523 13.4477 15 14 15C14.5523 15 15 14.5523 15 14C15 13.4477 14.5523 13 14 13ZM8 14C8 13.4477 8.44772 13 9 13C9.55228 13 10 13.4477 10 14C10 14.5523 9.55228 15 9 15C8.44772 15 8 14.5523 8 14Z" 
+            stroke="currentColor" 
+            strokeWidth="1.5" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"
+          />
+        </svg>
+        {getTotalItems() > 0 && (
+          <span className={styles.cartCount}>{getTotalItems()}</span>
+        )}
       </button>
 
       {isOpen && (

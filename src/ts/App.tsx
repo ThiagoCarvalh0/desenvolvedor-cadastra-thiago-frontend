@@ -5,6 +5,12 @@ import styles from './App.module.scss';
 // Lazy loading para componentes não críticos
 const ProductList = lazy(() => import('./components/ProductList'));
 const FilterBar = lazy(() => import('./components/FilterBar'));
+const Cart = lazy(() => import('./components/Cart').then(module => ({ default: module.Cart })));
+
+interface CartItem {
+  product: Product;
+  quantity: number;
+}
 
 export const App: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -21,6 +27,7 @@ export const App: React.FC = () => {
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState<boolean>(false);
   const [isMobileSortOpen, setIsMobileSortOpen] = useState<boolean>(false);
   const [isDesktopSortOpen, setIsDesktopSortOpen] = useState<boolean>(false);
+  const [cart, setCart] = useState<CartItem[]>([]);
 
 
   useEffect(() => {
@@ -123,9 +130,39 @@ export const App: React.FC = () => {
     setIsMobileFilterOpen(false);
   };
 
+  // Funções do carrinho
   const addToCart = (product: Product) => {
-    // Funcionalidade básica de adicionar ao carrinho conforme README
-    console.log('Produto adicionado ao carrinho:', product);
+    setCart(prevCart => {
+      const existingItem = prevCart.find(item => item.product.id === product.id);
+      
+      if (existingItem) {
+        return prevCart.map(item =>
+          item.product.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      } else {
+        return [...prevCart, { product, quantity: 1 }];
+      }
+    });
+  };
+
+  const removeFromCart = (productId: string) => {
+    setCart(prevCart => prevCart.filter(item => item.product.id !== productId));
+  };
+
+  const updateCartQuantity = (productId: string, quantity: number) => {
+    if (quantity <= 0) {
+      removeFromCart(productId);
+    } else {
+      setCart(prevCart =>
+        prevCart.map(item =>
+          item.product.id === productId
+            ? { ...item, quantity }
+            : item
+        )
+      );
+    }
   };
 
   const loadMoreProducts = () => {
@@ -157,19 +194,13 @@ export const App: React.FC = () => {
                   loading="eager"
                 />
               </div>
-              <button 
-                className={styles.cartIcon}
-                aria-label="Ver carrinho de compras"
-                type="button"
-              >
-                <img 
-                  src="./img/icon.webp" 
-                  alt="Ícone do carrinho de compras" 
-                  width="17"
-                  height="20"
-                  loading="eager"
+              <Suspense fallback={<div>Carregando carrinho...</div>}>
+                <Cart
+                  cart={cart}
+                  onRemoveItem={removeFromCart}
+                  onUpdateQuantity={updateCartQuantity}
                 />
-              </button>
+              </Suspense>
             </div>
           </header>
 
