@@ -1,26 +1,30 @@
 import React from 'react';
-import { Product } from '../Product';
+import { Product, ProductCardProps, CONSTANTS } from '../types';
 import styles from './ProductCard.module.scss';
 
-interface ProductCardProps {
-  product: Product;
-  onAddToCart: (product: Product) => void;
-}
-
 export const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
-  const formatPrice = (price: number) => {
+  // Constants
+  const IMAGE_DIMENSIONS = CONSTANTS.IMAGE_DIMENSIONS;
+  
+  // Utility functions
+  const formatPrice = (price: number): string => {
     return new Intl.NumberFormat('pt-BR', {
       style: 'currency',
       currency: 'BRL'
     }).format(price);
   };
 
-  const formatParcelamento = (parcelamento: number[]) => {
+  const formatParcelamento = (parcelamento: number[]): string => {
     const [parcelas, valorParcela] = parcelamento;
     return `${parcelas}x de ${formatPrice(valorParcela)}`;
   };
 
-  const handleAddToCart = () => {
+  const generateImageAlt = (): string => {
+    return `${product.name} - ${product.color} - R$ ${product.price.toFixed(2).replace('.', ',')}`;
+  };
+
+  // Event handlers
+  const handleAddToCart = (): void => {
     onAddToCart(product);
   };
 
@@ -29,9 +33,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }
       <div className={styles.imageContainer}>
         <img 
           src={product.image} 
-          alt={product.name}
+          alt={generateImageAlt()}
           className={styles.productImage}
           loading="lazy"
+          width={IMAGE_DIMENSIONS.width}
+          height={IMAGE_DIMENSIONS.height}
+          decoding="async"
         />
       </div>
       

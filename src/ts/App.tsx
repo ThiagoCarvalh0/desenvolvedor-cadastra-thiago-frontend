@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Product } from './Product';
+import { Product, Filters, SortType, CONSTANTS } from './types';
 import { ProductList } from './components/ProductList';
 import { FilterBar } from './components/FilterBar';
 import styles from './App.module.scss';
@@ -8,19 +8,18 @@ export const App: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [filters, setFilters] = useState({
+  const [filters, setFilters] = useState<Filters>({
     color: '',
     size: '',
     minPrice: 0,
-    maxPrice: 1000
+    maxPrice: CONSTANTS.DEFAULT_MAX_PRICE
   });
-  const [visibleProducts, setVisibleProducts] = useState<number>(8);
+  const [visibleProducts, setVisibleProducts] = useState<number>(CONSTANTS.INITIAL_VISIBLE_PRODUCTS);
   const [sortBy, setSortBy] = useState<string>('');
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState<boolean>(false);
   const [isMobileSortOpen, setIsMobileSortOpen] = useState<boolean>(false);
   const [isDesktopSortOpen, setIsDesktopSortOpen] = useState<boolean>(false);
 
-  const serverUrl = "http://localhost:5000";
 
   useEffect(() => {
     fetchProducts();
@@ -49,7 +48,7 @@ export const App: React.FC = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch(`${serverUrl}/products`);
+      const response = await fetch(`${CONSTANTS.SERVER_URL}/products`);
       const data = await response.json();
       setProducts(data);
       setLoading(false);
@@ -78,14 +77,14 @@ export const App: React.FC = () => {
     // Aplicar ordenação
     if (sortBy) {
       switch (sortBy) {
-        case 'recentes':
+        case SortType.RECENTES:
           // Ordenar por ID (mais recentes primeiro)
           filtered.sort((a, b) => b.id.localeCompare(a.id, undefined, { numeric: true }));
           break;
-        case 'menor-preco':
+        case SortType.MENOR_PRECO:
           filtered.sort((a, b) => a.price - b.price);
           break;
-        case 'maior-preco':
+        case SortType.MAIOR_PRECO:
           filtered.sort((a, b) => b.price - a.price);
           break;
         default:
@@ -144,18 +143,35 @@ export const App: React.FC = () => {
 
   return (
         <div className={styles.app}>
-          <header className={styles.header}>
+          <header className={styles.header} role="banner">
             <div className={styles.headerContent}>
               <div className={styles.logo}>
-                <img src="./img/logo_cadastra.webp" alt="Cadastra" className={styles.logoImg} />
+                <img 
+                  src="./img/logo_cadastra.webp" 
+                  alt="Cadastra - Next-Gen Company" 
+                  className={styles.logoImg}
+                  width="120"
+                  height="40"
+                  loading="eager"
+                />
               </div>
-              <div className={styles.cartIcon}>
-                <img src="./img/icon.webp" alt="Carrinho" />
-              </div>
+              <button 
+                className={styles.cartIcon}
+                aria-label="Ver carrinho de compras"
+                type="button"
+              >
+                <img 
+                  src="./img/icon.webp" 
+                  alt="Ícone do carrinho de compras" 
+                  width="17"
+                  height="20"
+                  loading="eager"
+                />
+              </button>
             </div>
           </header>
 
-      <main className={styles.main}>
+      <main className={styles.main} role="main">
         <div className={styles.mainContent}>
           {/* Seção de Título e Ordenação - Alinhada com header */}
           <div className={styles.pageHeader}>

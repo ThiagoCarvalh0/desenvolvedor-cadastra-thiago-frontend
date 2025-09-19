@@ -54,14 +54,30 @@
   .cartIcon {
     display: flex;
     align-items: center;
+    justify-content: center;
     height: 100%;
-    padding: 8px 0; // Adiciona padding vertical para centralizar melhor
+    padding: 8px 12px; // Padding para área clicável
     cursor: pointer;
+    background: none;
+    border: none;
+    outline: none;
+    transition: background-color 0.2s ease;
+    
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+      border-radius: 4px;
+    }
+    
+    &:focus {
+      background-color: rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+    }
     
     img {
       height: 24px;
       width: 24px;
       object-fit: contain; // Mantém proporção da imagem
+      pointer-events: none; // Evita conflitos de clique
     }
   }
 }
