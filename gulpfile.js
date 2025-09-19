@@ -39,6 +39,7 @@ function clean() {
   return del([paths.dest, paths.temp]);
 }
 
+//Serve a pasta dist para sincronizar o navegador com o servidor
 function server() {
   browserSync.init({
     server: {
