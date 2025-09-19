@@ -8,7 +8,7 @@ interface ProductListProps {
   onAddToCart: (product: Product) => void;
 }
 
-export const ProductList: React.FC<ProductListProps> = ({ products, onAddToCart }) => {
+const ProductList: React.FC<ProductListProps> = ({ products, onAddToCart }) => {
   if (products.length === 0) {
     return (
       <div className={styles.emptyState}>
@@ -21,14 +21,17 @@ export const ProductList: React.FC<ProductListProps> = ({ products, onAddToCart 
   return (
     <div className={styles.productList}>
       <div className={styles.grid}>
-        {products.map(product => (
+        {products.map((product, index) => (
           <ProductCard
             key={product.id}
             product={product}
             onAddToCart={onAddToCart}
+            isFirst={index === 0}
           />
         ))}
       </div>
     </div>
   );
 };
+
+export default ProductList;

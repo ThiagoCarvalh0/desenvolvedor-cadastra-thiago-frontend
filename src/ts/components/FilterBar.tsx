@@ -14,7 +14,7 @@ interface FilterBarProps {
   isMobile?: boolean;
 }
 
-export const FilterBar: React.FC<FilterBarProps> = ({ 
+const FilterBar: React.FC<FilterBarProps> = ({ 
   filters, 
   onFilterChange, 
   products,
@@ -467,3 +467,5 @@ export const FilterBar: React.FC<FilterBarProps> = ({
     </div>
   );
 };
+
+export default FilterBar;

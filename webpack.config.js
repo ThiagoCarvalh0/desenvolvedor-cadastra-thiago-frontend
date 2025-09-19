@@ -1,5 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = (paths) => ({
   entry: {
@@ -7,9 +8,11 @@ module.exports = (paths) => ({
   },
   output: {
     path: path.resolve(__dirname, paths.dest),
-    filename: "bundle.js",
+    filename: "[name].[contenthash].js",
+    chunkFilename: "[name].[contenthash].chunk.js",
+    clean: true,
   },
-  mode: "development",
+  mode: process.env.NODE_ENV === "production" ? "production" : "development",
   resolve: {
     extensions: [".tsx", ".ts", ".js", ".jsx"],
   },
@@ -60,5 +63,29 @@ module.exports = (paths) => ({
       },
     ],
   },
-  plugins: [],
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+        common: {
+          name: 'common',
+          minChunks: 2,
+          chunks: 'all',
+          enforce: true,
+        },
+      },
+    },
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, paths.html.src),
+      filename: 'index.html',
+      inject: true,
+    }),
+  ],
 });

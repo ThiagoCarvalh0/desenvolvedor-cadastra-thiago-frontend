@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { Product, Filters, SortType, CONSTANTS } from './types';
-import { ProductList } from './components/ProductList';
-import { FilterBar } from './components/FilterBar';
 import styles from './App.module.scss';
+
+// Lazy loading para componentes não críticos
+const ProductList = lazy(() => import('./components/ProductList'));
+const FilterBar = lazy(() => import('./components/FilterBar'));
 
 export const App: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -242,19 +244,23 @@ export const App: React.FC = () => {
           {/* Seção de Conteúdo Principal */}
           <div className={styles.contentSection}>
             <aside className={styles.sidebar}>
-              <FilterBar
-                filters={filters}
-                onFilterChange={handleFilterChange}
-                products={products}
-                isMobile={false}
-              />
+              <Suspense fallback={<div className={styles.loading}>Carregando filtros...</div>}>
+                <FilterBar
+                  filters={filters}
+                  onFilterChange={handleFilterChange}
+                  products={products}
+                  isMobile={false}
+                />
+              </Suspense>
             </aside>
 
             <div className={styles.content}>
-              <ProductList
-                products={displayedProducts}
-                onAddToCart={addToCart}
-              />
+              <Suspense fallback={<div className={styles.loading}>Carregando produtos...</div>}>
+                <ProductList
+                  products={displayedProducts}
+                  onAddToCart={addToCart}
+                />
+              </Suspense>
 
               {hasMoreProducts && (
                 <div className={styles.loadMore}>
@@ -324,12 +330,14 @@ export const App: React.FC = () => {
                   </button>
                 </h3>
                 <div className={styles.mobileFilters}>
-                  <FilterBar
-                    filters={filters}
-                    onFilterChange={handleFilterChange}
-                    products={products}
-                    isMobile={true}
-                  />
+                  <Suspense fallback={<div className={styles.loading}>Carregando filtros...</div>}>
+                    <FilterBar
+                      filters={filters}
+                      onFilterChange={handleFilterChange}
+                      products={products}
+                      isMobile={true}
+                    />
+                  </Suspense>
                 </div>
                 <div className={styles.sheetButtons}>
                   <button 
