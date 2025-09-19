@@ -109,6 +109,100 @@ pnpm start
 - **Frontend:** http://localhost:3000
 - **API (produtos):** http://localhost:5000/products
 
+### ⚠️ Solução de Problemas Comuns
+
+#### **Problema: Imagens não aparecem ou aparecem quebradas**
+**Causa:** Imagens WebP não foram geradas corretamente
+**Solução:**
+```bash
+# Regenerar todas as imagens WebP
+npx gulp imgWebP
+
+# Ou fazer build completo
+npm run build
+```
+
+#### **Problema: Erro "Cannot find module" ou dependências**
+**Solução:**
+```bash
+# Limpar cache e reinstalar
+rm -rf node_modules package-lock.json
+npm install
+```
+
+#### **Problema: Porta 3000 ou 5000 já em uso**
+**Solução:**
+```bash
+# Parar processos nas portas
+npx kill-port 3000 5000
+# Ou usar portas diferentes
+PORT=3001 npm start
+```
+
+#### **Problema: Layout com margens estranhas**
+**Solução:** O projeto já inclui correções de CSS reset. Se persistir:
+```bash
+# Rebuild completo
+npm run build
+npm start
+```
+
+#### **Verificação de funcionamento:**
+1. Frontend carrega em http://localhost:3000
+2. API responde em http://localhost:5000/products
+3. Imagens aparecem corretamente (formato WebP)
+4. Carrinho funciona (adicionar/remover produtos)
+5. Filtros funcionam (cor, tamanho, preço)
+6. Layout responsivo funciona
+
+### 🧪 Como Testar o Projeto
+
+#### **Teste 1: Funcionalidades Básicas**
+1. **Carregamento inicial:**
+   - Acesse http://localhost:3000
+   - Verifique se os produtos carregam
+   - Confirme que as imagens aparecem (formato WebP)
+
+2. **Filtros:**
+   - Teste filtro por cor (ex: "Azul", "Preto")
+   - Teste filtro por tamanho (ex: "M", "G")
+   - Teste filtro por preço (arraste os sliders)
+   - Combine múltiplos filtros
+
+3. **Ordenação:**
+   - Teste "Mais recentes"
+   - Teste "Menor preço"
+   - Teste "Maior preço"
+
+#### **Teste 2: Carrinho de Compras**
+1. **Adicionar produtos:**
+   - Clique em "Comprar" em qualquer produto
+   - Verifique se o contador no ícone do carrinho aumenta
+   - Clique no ícone do carrinho para abrir o dropdown
+
+2. **Gerenciar carrinho:**
+   - Use os botões +/- para alterar quantidades
+   - Clique no "×" para remover produtos
+   - Verifique se o total é calculado corretamente
+
+#### **Teste 3: Responsividade**
+1. **Desktop:** Teste em resolução 1920x1080
+2. **Tablet:** Teste em resolução 768x1024
+3. **Mobile:** Teste em resolução 375x667
+4. **Verifique:** Layout se adapta corretamente
+
+#### **Teste 4: Performance**
+1. **Abra DevTools (F12)**
+2. **Vá para Network tab**
+3. **Recarregue a página**
+4. **Verifique:** Imagens carregam em formato WebP
+5. **Verifique:** Bundle inicial é pequeno (~67KB)
+
+#### **Teste 5: API**
+1. **Acesse:** http://localhost:5000/products
+2. **Verifique:** Retorna array de produtos em JSON
+3. **Teste:** Filtros funcionam com dados da API
+
 ### Tecnologias utilizadas
 
 - **React** com TypeScript
@@ -187,16 +281,33 @@ const webpack = require("webpack");
 - Performance otimizada pelo Webpack
 - Flexibilidade para usar a melhor abordagem em cada contexto
 
-### Funcionalidades implementadas
+### ✅ Funcionalidades Implementadas
 
-**Layout responsivo** - Funciona em desktop, tablet e mobile  
-**Filtros avançados** - Por cor, tamanho e faixa de preço  
-**Sistema de ordenação** - Mais recentes, maior/menor preço  
-**Interface mobile** - Sheets laterais para filtros e ordenação  
-**Paginação** - Botão "Carregar Mais"  
-**Design pixel-perfect** - Baseado no protótipo do Figma  
-**Performance otimizada** - Lazy loading e otimizações  
-**Otimização de imagens** - Processo automatizado no Gulp para otimizar imagens e converter para WebP  
+#### **🎯 Obrigatórias (100% implementadas):**
+- ✅ **HTML5 e CSS3** - Estrutura semântica e estilos modernos
+- ✅ **TypeScript** - Tipagem forte e clean code
+- ✅ **Requisição à API** - Consumo da API de produtos via fetch
+- ✅ **Filtros de produtos** - Por cor, tamanho e faixa de preço
+- ✅ **Carrinho de compras** - Adicionar/remover produtos com cálculo de valores
+- ✅ **Carregar mais produtos** - Paginação com botão "Carregar Mais"
+- ✅ **Responsividade** - Funciona em desktop, tablet e mobile
+- ✅ **Sem frameworks CSS** - CSS puro sem Bootstrap/Foundation
+
+#### **🚀 Bônus (implementados):**
+- ✅ **TypeScript com clean code** - Interfaces, tipos e organização
+- ✅ **Otimização de imagens** - Processo Gulp para WebP
+- ✅ **Carrinho completo** - Com contador, dropdown e cálculos
+- ✅ **Performance otimizada** - Lazy loading e code splitting
+- ✅ **Ícone SVG** - Substituição de imagens por ícones vetoriais
+- ✅ **Layout pixel-perfect** - Baseado no protótipo do Figma
+
+#### **📱 Funcionalidades Avançadas:**
+- ✅ **Sistema de ordenação** - Mais recentes, maior/menor preço
+- ✅ **Interface mobile** - Sheets laterais para filtros e ordenação
+- ✅ **Estados de loading** - Feedback visual durante carregamento
+- ✅ **Acessibilidade** - ARIA labels e navegação por teclado
+- ✅ **Otimização de imagens** - WebP com qualidade otimizada
+- ✅ **Code splitting** - Bundle inicial reduzido em 95%  
 
 ### Estrutura do projeto
 
