@@ -18,6 +18,10 @@
   height: 100%;
   object-fit: contain; // Mostra a imagem completa sem cortar
   background-color: #f8f8f8; // Fundo neutro para espaços vazios
+  display: block; // Remove espaços inline
+  margin: 0; // Remove margens padrão
+  padding: 0; // Remove paddings padrão
+  border: none; // Remove bordas padrão
 }
 
 .productInfo {

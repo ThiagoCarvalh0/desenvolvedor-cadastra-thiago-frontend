@@ -9,9 +9,17 @@
   overflow-x: hidden; // Evita scroll horizontal
 }
 
-// Regra global para evitar extrapolação
-* {
-  box-sizing: border-box;
+// Box-sizing já definido no reset.scss
+
+// Loading states
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  color: #666;
+  font-size: 14px;
+  min-height: 100px;
 }
 
 .header {
@@ -48,6 +56,10 @@
       height: 25px;
       width: 165.82px;
       object-fit: contain; // Mantém proporção da imagem
+      display: block; // Remove espaços inline
+      margin: 0; // Remove margens padrão
+      padding: 0; // Remove paddings padrão
+      border: none; // Remove bordas padrão
     }
   }
 
@@ -78,6 +90,10 @@
       width: 24px;
       object-fit: contain; // Mantém proporção da imagem
       pointer-events: none; // Evita conflitos de clique
+      display: block; // Remove espaços inline
+      margin: 0; // Remove margens padrão
+      padding: 0; // Remove paddings padrão
+      border: none; // Remove bordas padrão
     }
   }
 }
