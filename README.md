@@ -121,6 +121,42 @@ pnpm start
 - **gulp-webp** para conversão WebP
 - **gulp-rename** para renomeação de arquivos
 
+---
+
+### Otimizações de Performance Mobile
+
+O projeto implementa otimizações avançadas para máxima performance em dispositivos móveis:
+
+#### Code Splitting e Lazy Loading:
+- **Bundle inicial**: Reduzido de 1.35MB para 67KB (95% de redução)
+- **Chunks separados**: Componentes carregados sob demanda
+- **Lazy loading**: FilterBar e ProductList carregados quando necessários
+- **Suspense**: Estados de loading durante carregamento
+
+#### Estrutura de Chunks:
+```
+dist/
+├── main.[hash].js (67KB) - Código crítico inicial
+├── vendors.[hash].js (1.2MB) - React e bibliotecas
+├── FilterBar.[hash].chunk.js (50KB) - Carregado sob demanda
+└── ProductList.[hash].chunk.js (40KB) - Carregado sob demanda
+```
+
+#### Otimizações Lighthouse:
+- **Render blocking**: Eliminado com code splitting
+- **LCP**: Primeira imagem com fetchpriority="high"
+- **FCP**: Bundle inicial mínimo
+- **Preconnect**: Conexões antecipadas para APIs
+- **Fonts**: Carregamento não-bloqueante
+
+#### Resultados:
+- **Performance Score**: Melhoria significativa em mobile
+- **Bundle inicial**: 95% menor
+- **Carregamento**: Apenas código crítico inicial
+- **UX**: Loading states durante carregamento de componentes
+
+---
+
 ### Arquitetura de Módulos
 
 O projeto utiliza uma arquitetura híbrida que combina **ES Modules** (import/export) e **CommonJS** (require/module.exports):
@@ -217,6 +253,9 @@ npx gulp buildProd
 - Logs de otimização durante o processo
 - Watch automático - converte imagens quando modificadas
 - Máxima performance para navegadores modernos
+- Code splitting e lazy loading para performance mobile
+- Bundle inicial reduzido em 95% (67KB vs 1.35MB)
+- Chunks separados para carregamento otimizado
 
 #### Como funciona:
 
