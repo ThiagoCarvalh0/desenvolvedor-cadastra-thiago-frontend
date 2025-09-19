@@ -2,7 +2,7 @@ import React from 'react';
 import { Product, ProductCardProps, CONSTANTS } from '../types';
 import styles from './ProductCard.module.scss';
 
-export const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
+export const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, isFirst = false }) => {
   // Constants
   const IMAGE_DIMENSIONS = CONSTANTS.IMAGE_DIMENSIONS;
   
@@ -35,10 +35,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }
           src={product.image} 
           alt={generateImageAlt()}
           className={styles.productImage}
-          loading="lazy"
+          loading={isFirst ? "eager" : "lazy"}
           width={IMAGE_DIMENSIONS.width}
           height={IMAGE_DIMENSIONS.height}
           decoding="async"
+          fetchPriority={isFirst ? "high" : "low"}
         />
       </div>
       

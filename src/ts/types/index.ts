@@ -29,6 +29,7 @@ export enum SortType {
 export interface ProductCardProps {
   product: Product;
   onAddToCart: (product: Product) => void;
+  isFirst?: boolean;
 }
 
 export interface ProductListProps {
